@@ -1,44 +1,48 @@
 import random
-import re
-options = ["rock", "paper", "scissors"]
-rps = random.randint(0,2)
+rps = ["rock", "paper", "scissors"]
+process = random.randint(0,2)
+cpu_choice = rps[process]
+
+player_choice = input("What would you like, rock, paper, or scissors? ").lower().strip()
 score = 0
 
-cpu_choice = options[rps]
+stages = [f"You beat me, I threw {cpu_choice}", f"You lost to me, I threw {cpu_choice}", f"You tied with me, I threw {cpu_choice}"]
 
 while True:
-    player_choice = input("Rock, paper or scissors? ").lower()
-    if player_choice not in options:
-        print("Please input a valid choice: rock, paper, or scissors.")
-    else:
+    if player_choice in rps:
         break
+    else:
+        player_choice = input("Please choose rock, paper, or scissors! ").lower().strip()
 
-if cpu_choice == options[0] and player_choice == options[1]:
-    print(f"You won! I picked {cpu_choice}")
+if player_choice == rps[0] and cpu_choice == rps[2]:
+    print(stages[0])
     score += 1
-elif cpu_choice == options[0] and player_choice == options[0]:
-    print(f"We tied! I picked {cpu_choice}")
-elif cpu_choice == options[0] and player_choice == options[2]:
-    print(f"I won! I picked {cpu_choice}")
+if player_choice == rps[0] and cpu_choice == rps[1]:
+    print(stages[1])
     score -= 1
+if player_choice == rps[0] and cpu_choice == rps[0]:
+    print(stages[2])
 
-if cpu_choice == options[1] and player_choice == options[2]:
-    print(f"You won! I picked {cpu_choice}")
+if player_choice == rps[1] and cpu_choice == rps[0]:
+    print(stages[0])
     score += 1
-elif cpu_choice == options[1] and player_choice == options[1]:
-    print(f"We tied! I picked {cpu_choice}")
-elif cpu_choice == options[1] and player_choice == options[0]:
-    print(f"I won! I picked {cpu_choice}")
-    score -= 1
+if player_choice == rps[1] and cpu_choice == rps[2]:
+    print(stages[1]) 
+    score -= 1 
+if player_choice == rps[1] and cpu_choice == rps[1]:
+    print(stages[2]) 
 
-if cpu_choice == options[2] and player_choice == options[0]:
-    print(f"You won! I picked {cpu_choice}")
+if player_choice == rps[2] and cpu_choice == rps[1]:
+    print(stages[0])
     score += 1
-elif cpu_choice == options[2] and player_choice == options[2]:
-    print(f"We tied! I picked {cpu_choice}")
-elif cpu_choice == options[2] and player_choice == options[1]:
-    print(f"I won! I picked {cpu_choice}")
-    score -= 1
-    
-print(cpu_choice)
-print((abs((score))))
+if player_choice == rps[2] and cpu_choice == rps[0]:
+    print(stages[1]) 
+    score -= 1 
+if player_choice == rps[2] and cpu_choice == rps[2]:
+    print(stages[2])
+
+
+if score < 0:
+    score = 0
+
+print(score)
